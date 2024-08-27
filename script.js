@@ -34,12 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
       <p><strong>Fecha de término:</strong> ${fechatermino}</p>
     `;
 
-    // Genera la URL para el código QR con todos los datos
+    // Genera la URL para la página con todos los datos codificados
+    const baseURL = "https://registroarauco.github.io/RegistroArauco/";
     const qrData = `fecharespuesta=${encodeURIComponent(fecharespuesta)}&patente=${encodeURIComponent(patente)}&empresa=${encodeURIComponent(empresa)}&rutempresa=${encodeURIComponent(rutempresa)}&nombre=${encodeURIComponent(nombre)}&apellidopaterno=${encodeURIComponent(apellidopaterno)}&apellidomaterno=${encodeURIComponent(apellidomaterno)}&rut=${encodeURIComponent(rut)}&contacto=${encodeURIComponent(contacto)}&email=${encodeURIComponent(email)}&lugar=${encodeURIComponent(lugar)}&fechainicio=${encodeURIComponent(fechainicio)}&fechatermino=${encodeURIComponent(fechatermino)}`;
    
-    // Añade un parámetro único para evitar el caché del navegador
-    const timestamp = new Date().getTime();
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&timestamp=${timestamp}`;
+    const fullUrl = `${baseURL}?${qrData}`;
+    
+    // Genera la URL para el código QR
+    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(fullUrl)}`;
    
     // Imprime la URL del código QR en la consola para verificarla
     console.log("Código QR generado:", qrCodeUrl);
@@ -48,4 +50,3 @@ document.addEventListener('DOMContentLoaded', function() {
     const qrCodeImg = document.getElementById('qr-code');
     qrCodeImg.src = qrCodeUrl;
 });
-
