@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
 
-    // Obtén los datos de los parámetros de la URL
+    // Obtén todos los datos de los parámetros de la URL
     const fecharespuesta = urlParams.get('fecharespuesta') || 'No disponible';
     const patente = urlParams.get('patente') || 'No disponible';
     const empresa = urlParams.get('empresa') || 'No disponible';
@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
       <p><strong>Fecha de término:</strong> ${fechatermino}</p>
     `;
 
-    // Genera la URL para el código QR
-    const qrData = `fecharespuesta=${fecharespuesta}&patente=${patente}&empresa=${empresa}&nombre=${nombre}&rut=${rut}&contacto=${contacto}&fechainicio=${fechainicio}&fechatermino=${fechatermino}`;
+    // Genera la URL para el código QR con todos los datos
+    const qrData = `fecharespuesta=${encodeURIComponent(fecharespuesta)}&patente=${encodeURIComponent(patente)}&empresa=${encodeURIComponent(empresa)}&rutempresa=${encodeURIComponent(rutempresa)}&nombre=${encodeURIComponent(nombre)}&apellidopaterno=${encodeURIComponent(apellidopaterno)}&apellidomaterno=${encodeURIComponent(apellidomaterno)}&rut=${encodeURIComponent(rut)}&contacto=${encodeURIComponent(contacto)}&email=${encodeURIComponent(email)}&lugar=${encodeURIComponent(lugar)}&fechainicio=${encodeURIComponent(fechainicio)}&fechatermino=${encodeURIComponent(fechatermino)}`;
    
     // Añade un parámetro único para evitar el caché del navegador
     const timestamp = new Date().getTime();
@@ -48,3 +48,4 @@ document.addEventListener('DOMContentLoaded', function() {
     const qrCodeImg = document.getElementById('qr-code');
     qrCodeImg.src = qrCodeUrl;
 });
+
